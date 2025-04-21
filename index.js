@@ -22,6 +22,10 @@ app.use((err, req, res, next) => {
   res.status(500).send("Something went wrong!");
 });
 
-app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
-});
+app
+  .listen(port, () => {
+    console.log(`App listening at http://localhost:${port}`);
+  })
+  .on("error", (err) => {
+    console.error("Error starting server", err);
+  });
