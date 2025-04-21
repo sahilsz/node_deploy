@@ -9,9 +9,12 @@ app.get("/success", (req, res) => {
 });
 
 // Endpoint that crashes the application
-app.get("/crash", (req, res) => {
-  throw new Error("Application crashed!");
-  process.exit(1);
+app.get("/crash", (req, res, next) => {
+  try {
+    throw new Error("Application crashed!");
+  } catch (error) {
+    next(error);
+  }
 });
 
 app.use((err, req, res, next) => {
